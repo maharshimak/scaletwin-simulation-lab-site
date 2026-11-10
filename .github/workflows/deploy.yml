@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'scaletwin-site.tar.gz'
+      - 'scaletwin-site-v2.tar.gz'
       - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
@@ -26,8 +26,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Extract verified website files
         run: |
+          echo '52d96dd596465dfcb8dfa5833cd71a06e7f683017b05c98c15714000777663dd  scaletwin-site-v2.tar.gz' | sha256sum --check --status
           mkdir -p site
-          tar -xzf scaletwin-site.tar.gz -C site
+          tar -xzf scaletwin-site-v2.tar.gz -C site
           test -f site/index.html
           test -d site/_next
       - name: Configure GitHub Pages
